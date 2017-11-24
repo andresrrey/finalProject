@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
         end
       rescue Exception => e
         puts 'CONSUMER ERROR'
-        puts "#{e}\n#{e.cause+("\n")}"
+        puts "#{e}\n#{e.cause.join("\n")}"
         exit(1)
       end
       return @recent_messages
