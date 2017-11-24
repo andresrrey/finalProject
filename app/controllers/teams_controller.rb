@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
     kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
     # Consumers with the same group id will form a Consumer Group together.
     $consumer = kafka.consumer(group_id: "my-consumer")
-      @recent_messages = []
+      $recent_messages = []
 
       $consumer.subscribe("CTF_countriesbyteam")
       begin
@@ -23,7 +23,7 @@ class TeamsController < ApplicationController
         puts "#{e}\n#{e.cause}"
         exit(1)
       end
-      return @recent_messages
+      return $recent_messages
   end
 
   def indexold
