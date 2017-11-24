@@ -16,12 +16,13 @@ class TeamsController < ApplicationController
     # It's better to shut down gracefully than to kill the process.
      trap("TERM") { consumer.stop }
 
+    @values=Hash.new()
     # This will loop indefinitely, yielding each message in turn.
-      consumer.each_message do |message|
-        @values[message.key]= message.value
-      end
+    #consumer.each_message do |message|
+    #  @values[message.key]= message.value
+    #end
 
-      return @values
-    end
+    return @values
+  end
 
 end
