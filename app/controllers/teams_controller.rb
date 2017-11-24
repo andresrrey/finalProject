@@ -22,7 +22,11 @@ class TeamsController < ApplicationController
         end
         break
       end
-      $recent_messages=  [{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}]
+      $recent_messages= [
+          {name: "Series A", data: {20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}} ,
+          {name: "Series B", data: {20.day.ago => 3, 1368174456 => 2, "2013-05-07 00:00:00 UTC" => 1}}
+      ]
+          #[{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}]
       #$consumer.each_message do |message|
       #    if !message.nil?
       #      $recent_messages << [message]
