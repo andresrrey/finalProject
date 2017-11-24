@@ -17,14 +17,20 @@ class TeamsController < ApplicationController
         break if Time.now > start_time + 5
         messages.each do |message|
           if !message.nil?
-            $hash[(JSON.parse(message.value)['id'])][JSON.parse(message.value)['ts']]=JSON.parse(message.value)['countries']
+            puts JSON.parse(message.value)['id']
+            puts JSON.parse(message.value)['name']
+            puts JSON.parse(message.value)['ts']
+            puts JSON.parse(message.value)['countries']
             puts $hash[(JSON.parse(message.value)['id'])]
+
+            #$hash[(JSON.parse(message.value)['id'])][JSON.parse(message.value)['ts']]=JSON.parse(message.value)['countries']
+            #puts $hash[(JSON.parse(message.value)['id'])]
             # $recent_messages << [message.value]
           end
         end
         break
       end
-    
+
       #[{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}]
       #$consumer.each_message do |message|
       #    if !message.nil?
