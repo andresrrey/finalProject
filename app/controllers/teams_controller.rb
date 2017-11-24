@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
         break if Time.now > start_time + 5
         messages.each do |message|
           if !message.nil?
-             puts JSON.parse(message.value).name
+             puts JSON.parse(message.value)[name]
             #$recent_messages << [message.value]
           end
         end
