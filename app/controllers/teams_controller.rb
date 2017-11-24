@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
         end
         break
       end
-
+    $hash={'2':{}, '3':{}, '4':{} ,'5':{}, '6':{}, '7':{}, '8':{}, '9':{}}
       $recent_messages=[
                             {name: "ItWorksOnMyContainer", data: $hash[9]},
                             {name: "Access Denied", data: $hash[8]},
@@ -38,6 +38,7 @@ class TeamsController < ApplicationController
                             {name: "Los Borbotones", data: $hash[3]},
                             {name: "Chanfle", data: $hash[2]}
       ]
+
     start_time=Time.now
 
     loop do
