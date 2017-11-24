@@ -3,6 +3,7 @@ class TeamsController < ApplicationController
 
   def index
     @recent_messages = []
+
     Thread.new do
       $consumer.subscribe(with_prefix(CTF_countriesbyteam))
       begin
@@ -19,9 +20,6 @@ class TeamsController < ApplicationController
     end
     return @recent_messages
   end
-
-
-
 
   def indexold
     kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
