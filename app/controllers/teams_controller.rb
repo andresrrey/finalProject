@@ -11,7 +11,10 @@ class TeamsController < ApplicationController
       $consumer.subscribe("CTF_countriesbyteam")
       begin
         $consumer.each_message do |message|
-          $recent_messages << [message]
+          if !message.nil? do
+            $recent_messages << [message]
+          end
+          end
           $recent_messages.shift if $recent_messages.length > 10
           puts "consumer received message! local message count: #{$recent_messages.size} offset=#{message.offset}"
         end
