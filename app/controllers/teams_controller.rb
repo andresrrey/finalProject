@@ -11,15 +11,12 @@ class TeamsController < ApplicationController
       $consumer.subscribe("CTF_countriesbyteam")
       $counter=0
       $consumer.each_message do |message|
-          if $counter>=10
-            break
-          end
           if !message.nil?
             $recent_messages << [message]
           end
           $recent_messages.shift if $recent_messages.length > 10
           puts "consumer received message! local message count: #{$recent_messages.size} offset=#{message.offset}"
-        $counter+=1
+        break
       end
       rescue Exception => e
         puts 'CONSUMER ERROR'
