@@ -16,10 +16,7 @@ class TeamsController < ApplicationController
     # It's better to shut down gracefully than to kill the process.
      trap("TERM") { consumer.stop }
 
-    @values=[
-        {name: "Series A", data: [0,1,2]},
-        {name: "Series B", data: [1,2,1]}
-    ]
+    @values={20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}
 
     # This will loop indefinitely, yielding each message in turn.
     #consumer.each_message do |message|
