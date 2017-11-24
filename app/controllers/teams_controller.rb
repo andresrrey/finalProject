@@ -9,8 +9,10 @@ class TeamsController < ApplicationController
       $recent_messages = []
       $consumer.subscribe("CTF_countriesbyteam")
       $counter=0
+      offset = :earliest
+
       loop do
-        messages = kafka.fetch_messages(topic: "CTF_countriesbyteam")
+        messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 10, offset: offset)
         break if messages.empty?
         messages.each do |message|
           if !message.nil?
