@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   require "kafka"
-
+  require 'json'
   def index
 
     kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
         break if Time.now > start_time + 5
         messages.each do |message|
           if !message.nil?
-             puts message.value.name
+             puts JSON.parse(message.value).name
             #$recent_messages << [message.value]
           end
         end
