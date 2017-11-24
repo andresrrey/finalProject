@@ -32,7 +32,16 @@ class TeamsController < ApplicationController
         break
       end
 
-      #[{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}]
+      $recent_messages=[
+                            {name: "ItWorksOnMyContainer", data: $hash[9]},
+                            {name: "ItWorksOnMyContainer", data: $hash[8]},
+                            {name: "ItWorksOnMyContainer", data: $hash[7]},
+                            {name: "ItWorksOnMyContainer", data: $hash[6]},
+                            {name: "ItWorksOnMyContainer", data: $hash[5]},
+                            {name: "ItWorksOnMyContainer", data: $hash[4]},
+                            {name: "ItWorksOnMyContainer", data: $hash[3]},
+                            {name: "ItWorksOnMyContainer", data: $hash[2]}
+                        ]
       #$consumer.each_message do |message|
       #    if !message.nil?
       #      $recent_messages << [message]
