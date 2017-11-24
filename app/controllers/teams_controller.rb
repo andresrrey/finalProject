@@ -11,8 +11,8 @@ class TeamsController < ApplicationController
       $consumer.subscribe("CTF_countriesbyteam")
       $counter=0
       $consumer.each_message do |message|
-          if $counter>=55
-          break
+          if $counter>=10
+            break
           end
           if !message.nil?
             $recent_messages << [message]
