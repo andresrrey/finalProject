@@ -34,13 +34,13 @@ class TeamsController < ApplicationController
 
       $recent_messages=[
                             {name: "ItWorksOnMyContainer", data: $hash[9]},
-                            {name: "ItWorksOnMyContainer", data: $hash[8]},
-                            {name: "ItWorksOnMyContainer", data: $hash[7]},
-                            {name: "ItWorksOnMyContainer", data: $hash[6]},
-                            {name: "ItWorksOnMyContainer", data: $hash[5]},
-                            {name: "ItWorksOnMyContainer", data: $hash[4]},
-                            {name: "ItWorksOnMyContainer", data: $hash[3]},
-                            {name: "ItWorksOnMyContainer", data: $hash[2]}
+                            {name: "Access Denied", data: $hash[8]},
+                            {name: "Demogorgons", data: $hash[7]},
+                            {name: "avadne", data: $hash[6]},
+                            {name: "Bits Please", data: $hash[5]},
+                            {name: "Los Jimmys", data: $hash[4]},
+                            {name: "Los Borbotones", data: $hash[3]},
+                            {name: "Chanfle", data: $hash[2]}
                         ]
       #$consumer.each_message do |message|
       #    if !message.nil?
