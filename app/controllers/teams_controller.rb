@@ -10,9 +10,10 @@ class TeamsController < ApplicationController
       $consumer.subscribe("CTF_countriesbyteam")
       $counter=0
       offset = :earliest
+      start_time=Time.now
       loop do
         messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 0, offset: offset, max_wait_time: 2)
-        break if true
+        break if Time.now > start_time + 5
         messages.each do |message|
           if !message.nil?
              puts message.value
