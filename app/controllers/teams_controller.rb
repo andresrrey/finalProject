@@ -17,12 +17,12 @@ class TeamsController < ApplicationController
         messages.each do |message|
           if !message.nil?
              puts message.value
-            $recent_messages << [message.value]
+            #$recent_messages << [message.value]
           end
         end
         break
       end
-
+      $recent_messages=  {20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}
       #$consumer.each_message do |message|
       #    if !message.nil?
       #      $recent_messages << [message]
