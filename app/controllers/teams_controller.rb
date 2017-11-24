@@ -6,10 +6,10 @@ class TeamsController < ApplicationController
     kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
     # Consumers with the same group id will form a Consumer Group together.
     $consumer = kafka.consumer(group_id: "my-consumer")
-    $recent_messages= [
+    $recent_messages=
         {name: "Demogorgons", data: {20.day.ago => 5, 1368174456 => 4}} ,
         {name: "ITWORKSONMYCONTAINER", data: {20.day.ago => 2, 1368174456 => 3}}
-    ]
+
     $consumer.subscribe("CTF_countriesbyteam")
       $counter=0
       offset = :earliest
@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
         break if Time.now > start_time + 5
         messages.each do |message|
           if !message.nil?
-             puts JSON.parse(message.value)['name']
+             puts JSON.parse(message.value)['id']+' '+JSON.parse(message.value)['name']
             #$recent_messages << [message.value]
           end
         end
