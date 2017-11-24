@@ -10,26 +10,28 @@ class TeamsController < ApplicationController
       $consumer.subscribe("CTF_countriesbyteam")
       $counter=0
       offset = :earliest
+      #loop do
+      #  messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 0, offset: offset, max_wait_time: 2)
+      #  break if messages.empty?
+      #  messages.each do |message|
+      #    if !message.nil?
+      #       puts message.value
+      #      $recent_messages << [message]
+      #    end
+      #  end
+      #  break
+      #end
 
-      loop do
-        messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 0, offset: offset, max_wait_time: 2)
-        break if messages.empty?
-        messages.each do |message|
+      $consumer.each_message do |message|
           if !message.nil?
-             puts message.value
             $recent_messages << [message]
+            puts message.value
           end
-        end
-        break
+          $recent_messages.shift if $recent_messages.length > 10
+          puts "consumer received message! local message count: #{$recent_messages.size} offset=#{message.offset}"
+          $consumer.stop
+
       end
-     # $consumer.each_message do |message|
-     #     if !message.nil?
-     #       $recent_messages << [message]
-     #     end
-     #     $recent_messages.shift if $recent_messages.length > 10
-     #     puts "consumer received message! local message count: #{$recent_messages.size} offset=#{message.offset}"
-     #   break
-     # end
       rescue Exception => e
         puts 'CONSUMER ERROR'
         puts "#{e}\n#{e.cause}"
