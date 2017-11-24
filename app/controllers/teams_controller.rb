@@ -2,6 +2,28 @@ class TeamsController < ApplicationController
   require "kafka"
 
   def index
+    @recent_messages = []
+    Thread.new do
+      $consumer.subscribe(with_prefix(CTF_countriesbyteam))
+      begin
+        $consumer.each_message do |message|
+          $recent_messages << [message, {received_at: message.ts}]
+          $recent_messages.shift if $recent_messages.length > 10
+          puts "consumer received message! local message count: #{$recent_messages.size} offset=#{message.offset}"
+        end
+      rescue Exception => e
+        puts 'CONSUMER ERROR'
+        puts "#{e}\n#{e.backtrace.join("\n")}"
+        exit(1)
+      end
+    end
+    return @recent_messages
+  end
+
+
+
+
+  def indexold
     kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
 
     # Consumers with the same group id will form a Consumer Group together.
@@ -14,7 +36,10 @@ class TeamsController < ApplicationController
 
     # Stop the consumer when the SIGTERM signal is sent to the process.
     # It's better to shut down gracefully than to kill the process.
-     trap("TERM") { consumer.stop }
+    trap("TERM") { consumer.stop }
+
+
+
 
     @values=[{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 2, 1368174456 => 7, "2013-05-07 00:00:00 UTC" => 8}]
 
