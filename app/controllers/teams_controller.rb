@@ -17,6 +17,11 @@ class TeamsController < ApplicationController
      trap("TERM") { consumer.stop }
 
     @values=Hash.new()
+    @values[0]=5
+    @values[1]=6
+    @values[2]=7
+    @values[2]=8
+
     # This will loop indefinitely, yielding each message in turn.
     #consumer.each_message do |message|
     #  @values[message.key]= message.value
