@@ -27,7 +27,6 @@ class TeamsController < ApplicationController
         end
         break
       end
-    $hash={'2':{}, '3':{}, '4':{} ,'5':{}, '6':{}, '7':{}, '8':{}, '9':{}}
       $recent_messages=[
                             {name: "ItWorksOnMyContainer", data: $hash[9]},
                             {name: "Access Denied", data: $hash[8]},
@@ -40,6 +39,7 @@ class TeamsController < ApplicationController
       ]
 
     start_time=Time.now
+    $hash={'2':{}, '3':{}, '4':{} ,'5':{}, '6':{}, '7':{}, '8':{}, '9':{}}
 
     loop do
       messages = kafka.fetch_messages(topic: "CTF_pointsbyteam", partition: 0, offset: offset, max_wait_time: 2)
