@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   require "kafka"
 
   def index
-    kafka = Kafka.new(seed_brokers: ["kafka1:9092", "kafka2:9092"])
+    kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
 
     # Consumers with the same group id will form a Consumer Group together.
     consumer = kafka.consumer(group_id: "my-consumer")
