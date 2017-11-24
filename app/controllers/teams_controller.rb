@@ -12,7 +12,7 @@ class TeamsController < ApplicationController
       offset = :earliest
 
       loop do
-        messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 0, offset: offset)
+        messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 0, offset: offset, max_wait_time: 2)
         break if messages.empty?
         messages.each do |message|
           if !message.nil?
