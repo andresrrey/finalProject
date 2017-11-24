@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
         messages.each do |message|
           if !message.nil?
              puts message.value
-            $recent_messages << [message]
+            $recent_messages << [message.value]
           end
         end
         break
