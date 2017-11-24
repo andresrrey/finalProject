@@ -6,9 +6,6 @@ kafka = Kafka.new(
 
   # Set an optional client id in order to identify the client to Kafka:
 )
-# Instantiate a new producer.
-producer = kafka.producer
-
 kafka.each_message(topic: "CTF_topic") do |message|
   puts message.offset, message.key, message.value
 end
