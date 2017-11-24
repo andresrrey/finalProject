@@ -20,6 +20,7 @@ class TeamsController < ApplicationController
             $recent_messages << [message]
           end
         end
+        break
       end
      # $consumer.each_message do |message|
      #     if !message.nil?
