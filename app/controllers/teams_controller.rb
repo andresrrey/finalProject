@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
               $hash[(JSON.parse(message.value)['id'])]=Hash.new()
             end
             $hash[(JSON.parse(message.value)['id'])][JSON.parse(message.value)['ts']]=JSON.parse(message.value)['countries']
-            #puts $hash[(JSON.parse(message.value)['id'])]
+            puts $hash[(JSON.parse(message.value)['id'])]
             # $recent_messages << [message.value]
           end
         end
