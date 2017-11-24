@@ -2,9 +2,8 @@ class TeamsController < ApplicationController
   require "kafka"
 
   def index
-    @recent_messages = []
+      @recent_messages = []
 
-    Thread.new do
       $consumer.subscribe(with_prefix(CTF_countriesbyteam))
       begin
         $consumer.each_message do |message|
@@ -17,8 +16,7 @@ class TeamsController < ApplicationController
         puts "#{e}\n#{e.backtrace.join("\n")}"
         exit(1)
       end
-    end
-    return @recent_messages
+      return @recent_messages
   end
 
   def indexold
