@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   def index
       @recent_messages = []
 
-      $consumer.subscribe(with_prefix(CTF_countriesbyteam))
+      $consumer.subscribe(with_prefix("CTF_countriesbyteam"))
       begin
         $consumer.each_message do |message|
           $recent_messages << [message, {received_at: message.ts}]
