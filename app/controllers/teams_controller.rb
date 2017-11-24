@@ -17,8 +17,8 @@ class TeamsController < ApplicationController
      trap("TERM") { consumer.stop }
 
     @values=[
-        {name: "Series A", data: series_a},
-        {name: "Series B", data: series_b}
+        {name: "Series A", data: 100},
+        {name: "Series B", data: 200}
     ]
 
     # This will loop indefinitely, yielding each message in turn.
