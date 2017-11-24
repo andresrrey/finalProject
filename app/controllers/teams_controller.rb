@@ -6,28 +6,26 @@ class TeamsController < ApplicationController
     kafka = Kafka.new(seed_brokers: ["UKRB-INPFTVM-T01:9092"])
     # Consumers with the same group id will form a Consumer Group together.
     $consumer = kafka.consumer(group_id: "my-consumer")
-    $recent_messages=
-        {name: "Demogorgons", data: {20.day.ago => 5, 1368174456 => 4}} ,
-        {name: "ITWORKSONMYCONTAINER", data: {20.day.ago => 2, 1368174456 => 3}}
 
     $consumer.subscribe("CTF_countriesbyteam")
-      $counter=0
+    $hash={'2':{}, '3':{}, '4':{} ,'5':{}, '6':{}, '7':{}, '8':{}, '9':{}}
       offset = :earliest
       start_time=Time.now
-      loop do
+
+    loop do
         messages = kafka.fetch_messages(topic: "CTF_countriesbyteam", partition: 0, offset: offset, max_wait_time: 2)
         break if Time.now > start_time + 5
         messages.each do |message|
           if !message.nil?
-             puts JSON.parse(message.value)['id']
-             puts JSON.parse(message.value)['name']
-            #$recent_messages << [message.value]
+            $hash[(JSON.parse(message.value)['id'])][JSON.parse(message.value)['ts']]=JSON.parse(message.value)['countries']
+            puts $hash[(JSON.parse(message.value)['id'])]
+            # $recent_messages << [message.value]
           end
         end
         break
       end
-
-          #[{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}]
+    
+      #[{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7},{20.day.ago => 5, 1368174456 => 4, "2013-05-07 00:00:00 UTC" => 7}]
       #$consumer.each_message do |message|
       #    if !message.nil?
       #      $recent_messages << [message]
